@@ -2,13 +2,13 @@ import React from 'react';
 import App from '../pages/App';
 import About from '../pages/About';
 import Home from '../pages/Home';
-import Contact from '../pages/West';
+import GoWest from '../pages/West';
 
 const routes = [
 	{
-		Component: Contact,
-		key: 'Contact',
-		path: '/contact'
+		Component: GoWest,
+		key: 'GoWest',
+		path: '/GoWest'
 	},
 	{
 		Component: Home,
