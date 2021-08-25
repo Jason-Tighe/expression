@@ -1,14 +1,14 @@
 import React from 'react';
 import App from '../pages/App';
-import About from '../pages/About';
+import Chat from '../pages/Chat';
 import Home from '../pages/Home';
-import GoWest from '../pages/West';
+import MoodBoost from '../pages/MoodBoost';
 
 const routes = [
 	{
-		Component: GoWest,
-		key: 'GoWest',
-		path: '/GoWest'
+		Component: MoodBoost,
+		key: 'MoodBoost',
+		path: '/MoodBoost'
 	},
 	{
 		Component: Home,
@@ -16,9 +16,9 @@ const routes = [
 		path: '/home'
 	},
 	{
-		Component: About,
-		key: 'About',
-		path: '/about'
+		Component: Chat,
+		key: 'Chat',
+		path: '/chat'
 	},
 	{
 		Component: App,

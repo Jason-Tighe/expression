@@ -33,7 +33,7 @@ export default function Home(props) {
 						<div key={vent._id}>
 							<h1>{vent.title}</h1>
 							<p>{vent.body}</p>
-							<div>{vent.mood}</div>
+							<div>{vent.mood ? 'Feeling Good' : 'Not so great'}</div>
 						</div>
 					);
 				})}
