@@ -52,9 +52,7 @@ export default function MoodBoost(props) {
 
 	useEffect(() => {
 		getAffirmation();
-		console.log('aff');
 		getWest();
-		console.log('west');
 		getDad();
 	}, []);
 
@@ -64,7 +62,7 @@ export default function MoodBoost(props) {
 				<h1>
 					{Object.keys(west).length ? <WestQuote west={west} /> : 'No Yee'}
 				</h1>
-				<button className="btn-primary lead" onClick={getWest}>
+				<button className="btn-primary btn-block" id="btn" onClick={getWest}>
 					More Yee
 				</button>
 			</div>
@@ -76,7 +74,11 @@ export default function MoodBoost(props) {
 						'Affirm these hands'
 					)}
 				</h1>
-				<button className="btn-primary lead" onClick={getAffirmation}>
+				<button
+					className="btn-primary btn-block"
+					id="btn"
+					onClick={getAffirmation}
+				>
 					Confirm for more Affirm
 				</button>
 			</div>
@@ -84,7 +86,7 @@ export default function MoodBoost(props) {
 				<h1>
 					{Object.keys(dad).length ? <DadJoke dad={dad} /> : 'Ask your mom...'}
 				</h1>
-				<button className="btn-primary lead" onClick={getDad}>
+				<button className="btn-primary btn-block" id="btn" onClick={getDad}>
 					Hello Joke, I'm Dad
 				</button>
 			</div>
