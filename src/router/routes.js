@@ -6,15 +6,16 @@ import MoodBoost from '../pages/MoodBoost';
 
 const routes = [
 	{
-		Component: MoodBoost,
-		key: 'MoodBoost',
-		path: '/MoodBoost'
-	},
-	{
 		Component: Home,
 		key: 'Home',
 		path: '/home'
 	},
+	{
+		Component: MoodBoost,
+		key: 'MoodBoost',
+		path: '/MoodBoost'
+	},
+
 	{
 		Component: Chat,
 		key: 'Chat',

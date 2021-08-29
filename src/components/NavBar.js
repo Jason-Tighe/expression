@@ -10,32 +10,38 @@ const NavBar = props => {
 	};
 
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light">
-			<div className="container-fluid">
-				<a className="navbar-brand" href="/home">
-					<h1 className="logo">Funk</h1>
-					<p>Funk That!</p>
-				</a>
-				<div className="nav-bar-toggler" type="button" onClick={handleClick}>
-					<span className="fas fa-bars"></span>
+		<>
+			<nav className="navbar navbar-expand-lg navbar-light">
+				<div className="container-fluid">
+					<a className="navbar-brand" href="/home">
+						<div className="d-flex p-2">
+							<h1 className="display-3 logo">Funk!</h1>
+							<p className="p-1 slogan center">
+								<small>Funk That!</small>
+							</p>
+						</div>
+					</a>
+					<div className="nav-bar-toggler" type="button" onClick={handleClick}>
+						<span className="fas fa-bars"></span>
+					</div>
 				</div>
-				<div className="navbar-collapse">
-					{drop ? (
-						<ul>
-							{props.routes.map(({ key, path }) => (
-								<li key={key} className="nav-item">
-									<Link className="naem" key={key} to={path}>
-										{key}
-									</Link>
-								</li>
-							))}
-						</ul>
-					) : (
-						''
-					)}
-				</div>
+			</nav>
+			<div className="navbar-collapse">
+				{drop ? (
+					<ul>
+						{props.routes.map(({ key, path }) => (
+							<li key={key} className="nav-item">
+								<Link className="nav-link" key={key} to={path}>
+									{key}
+								</Link>
+							</li>
+						))}
+					</ul>
+				) : (
+					''
+				)}
 			</div>
-		</nav>
+		</>
 	);
 };
 

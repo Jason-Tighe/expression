@@ -2,6 +2,11 @@
 @import "reset";
 @import "grid";
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+$base-color: #c6538c;
+$other-color: #c6538c;
+$background-color: #c6538c;
+$btn-color: #FAAD80;
+
 
 body {
   font-size: 16px;
@@ -19,6 +24,11 @@ nav{
     a{
       h1.logo{
         font-family: 'Paytone One', sans-serif;
+        color: rgb(255, 255, 255) !important;
+      }p.slogan{
+        color: rgb(255, 255, 255) !important;
+        font-style: italic !important;
+        position: relative;
       }
     }
   }
@@ -28,24 +38,51 @@ nav{
   background-color: #FF6767 !important;
 }
 
+h1.Display-4{
+  align-items: center !important;
+}
+
+#moodIcon{
+  position: relative !important;
+}
+
+#bubble{
+  position:absolute;
+  height: 50%;
+}
+
+#home{
+  margin-top: 10% !important;
+}
+
+#feet{
+  background-color: $btn-color !important;
+}
+
+
 .HomePage {
 
 }
 
-.AboutPage {
+// .mt {
+//   margin-top: 8vh !important;
+// }
 
+#form{
+  position: relative !important;
+  top: 3vh;
 }
+
 
 #btn{
   border-color: #FAAD80 !important;
   background-color: #FAAD80 !important;
 }
 
+Link{
+  text-decoration: none !important;
+  color: rgb(255, 255, 255) !important;
 
-button.btn-primary.lead{
-  position: relative;
-  height: 30px;
-  width: 40%;
 }
 
 .AppPage {
