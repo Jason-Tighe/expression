@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import WestQuote from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/WestQuote.js';
-import Affirmation from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/Affirm.js';
-import DadJoke from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/DadJoke.js';
+import WestQuote from '../components/WestQuote.js';
+import Affirmation from '../components/Affirm';
+import DadJoke from '../components/DadJoke';
 
 export default function MoodBoost(props) {
 	const [affirmation, setAffirmation] = useState({});
