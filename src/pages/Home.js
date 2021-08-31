@@ -29,11 +29,6 @@ export default function Home(props) {
 		})();
 	}, []);
 
-	//this should now make it so that the most recent post will appear instead of a random one... ideally
-	const recentPost = () => {
-		const recent = vents[vents.length - 1];
-		setOneVent(recent);
-	};
 	//Getting rid of the opening statment and loading a random post
 	const swap = () => {
 		setStatement(false);
@@ -48,7 +43,7 @@ export default function Home(props) {
 
 	const handleSubmit = async e => {
 		e.preventDefault();
-		// e.target.reset();
+		e.target.reset();
 		try {
 			const response = await fetch('/api/vents/', {
 				method: 'POST',
@@ -59,6 +54,7 @@ export default function Home(props) {
 			});
 			const data = await response.json();
 			setVents([...vents, data]);
+			setOneVent(data);
 			//below is supposed to clear/reset the state of  the form... but doesnt... idk why.
 			setNewVent({
 				title: '',
@@ -72,7 +68,6 @@ export default function Home(props) {
 
 	const partyPack = e => {
 		handleSubmit(e);
-		recentPost();
 		swap();
 	};
 
@@ -85,15 +80,18 @@ export default function Home(props) {
 	return (
 		<div className="HomePage">
 			<div>
-				<div id="home" className="container-md">
+				<div id="home" className="card container-md">
 					{statement ? (
 						<>
-							<h1 className="Display-4 text-center"> Welcome to Funk!</h1>
-							<p className="text-center">
+							<h1 className="card-header Display-4 text-center">
+								{' '}
+								Welcome to Funk!
+							</h1>
+							<p className="card-body text-center">
 								Whether you're feeling Funky fresh or just not feeling it at
 								all, we encourage you to express how you're feeling.
 							</p>
-							<p className="my-4 text-justify-center p-3">
+							<p className="card-body text-center">
 								Feel free to post anonymously how you feel. Not feeling great,
 								or just want some laughs? Check out our MoodBoosters. Want to
 								see how others are doing? Check out previous posts. Just want to
@@ -160,57 +158,74 @@ export default function Home(props) {
 						</>
 					) : (
 						<>
-							<h2 className="text-center">
+							<h3 className="text-center">
 								<small>A Previous Funk:</small>
-							</h2>
-							<h1 className="Display-4 text-center">{oneVent.title}</h1>
-							<div>
-								{oneVent.mood ? (
-									<div className="d-flex justify-content-center">
-										<i className="far fa-grin" id="moodIcon">
-											Awesome
-										</i>
-									</div>
-								) : (
-									<div className="d-flex justify-content-center">
-										<i className="far fa-frown-open" id="moodIcon">
-											Not awesome
-										</i>
-									</div>
-								)}
+							</h3>
+							<div className="card text-center">
+								<h1 className="card-header text-center">{oneVent.title}</h1>
+
+								<div>
+									{oneVent.mood ? (
+										<div className="card-body justify-content-center">
+											<i className="far fa-grin" id="moodIcon">
+												Awesome
+											</i>
+										</div>
+									) : (
+										<div className="card-body justify-content-center">
+											<i className="far fa-frown-open" id="moodIcon">
+												Not awesome
+											</i>
+										</div>
+									)}
+								</div>
+								<p className="card-body">{oneVent.body}</p>
 							</div>
-							<p className="text-center p-2">{oneVent.body}</p>
 							{form ? (
 								<>
-									{' '}
-									<button
-										className="btn-primary btn-lg btn-block"
-										onClick={swap}
-									>
-										<span className="btn-label">
-											<i className="fas fa-sync-alt"></i>
-										</span>
-									</button>
-									<button
-										className="btn btn-lg btn-block"
-										id="btn"
-										onClick={add}
-									>
-										{icon ? (
+									<div className="d-flex card-footer justify-content-center">
+										<button
+											id="btn"
+											className="btn-primary btn-lg btn-block"
+											onClick={swap}
+										>
 											<span className="btn-label">
-												<i className="fas fa-plus-square"></i>
+												<i className="fas fa-sync-alt"></i>
 											</span>
-										) : (
-											<span className="btn-label">
-												<i className="fas fa-minus-square"></i>
-											</span>
-										)}
-									</button>
+										</button>
+										<Link to={`/${oneVent._id}`}>
+											<button
+												className="btn-primary btn-lg btn-block"
+												id="btn2"
+											>
+												<span className="t">
+													<i className="fas fa-edit"></i>
+												</span>
+											</button>
+										</Link>
+
+										<button
+											className="btn-primary btn-lg btn-block"
+											id="btn"
+											onClick={add}
+										>
+											{icon ? (
+												<span className="btn-label">
+													<i className="fas fa-plus-square"></i>
+												</span>
+											) : (
+												<span className="btn-label">
+													<i className="fas fa-minus-square"></i>
+												</span>
+											)}
+										</button>
+									</div>
 								</>
 							) : (
 								<>
 									<div className="fixed-bottom">
 										<button
+											id="btn"
 											className="btn-primary btn-lg btn-block"
 											onClick={swap}
 										>
@@ -239,6 +254,7 @@ export default function Home(props) {
 						</>
 					)}
 				</div>
+
 				<div id="form" className="fixed-bottom">
 					{form ? (
 						<form onSubmit={partyPack} className="form-horizontal">
@@ -291,7 +307,7 @@ export default function Home(props) {
 							</div>
 
 							<button
-								id="fold"
+								id="btn2"
 								className="p-1"
 								className="btn btn-primary btn-block fixed-bottom"
 								type="submit"

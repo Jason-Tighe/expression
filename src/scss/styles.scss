@@ -2,14 +2,16 @@
 @import "reset";
 @import "grid";
 @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
-$base-color: #c6538c;
-$other-color: #c6538c;
-$background-color: #c6538c;
-$btn-color: #FAAD80;
-
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
+$base-color: #780116;
+$nav-color: #f7b538;
+$background-color: #e49b58;
+$btn-color: #d8572a;
+$btn-color2: #c32f27;
 
 body {
   font-size: 16px;
+  background-color: $background-color !important;
 }
 
 .NavBar {
@@ -19,7 +21,7 @@ body {
 }
 
 nav{
-  background-color: #FF3D68 !important;
+  background-color: $base-color !important;
   div.container-fluid{
     a{
       h1.logo{
@@ -34,8 +36,23 @@ nav{
   }
 }
 
+#linky{
+  font-family: 'Dela Gothic One', cursive !important;
+  text-decoration: none !important;
+  color: rgb(255, 255, 255) !important;
+  font-size: 1.5rem;
+}
+
+#linky:hover{
+  font-family: 'Dela Gothic One', cursive !important;
+  text-decoration: none !important;
+  color: rgb(255, 255, 255) !important;
+  background-color: #772f1a;
+  animation: wiggle 2.5s infinite !important;
+}
+
 .navbar-collapse{
-  background-color: #FF6767 !important;
+  background-color: $nav-color !important;
 }
 
 h1.Display-4{
@@ -45,7 +62,10 @@ h1.Display-4{
 #moodIcon{
   position: relative !important;
 }
+#mood{
+  background-color: $nav-color !important;
 
+}
 #bubble{
   position:absolute;
   height: 50%;
@@ -59,14 +79,12 @@ h1.Display-4{
   background-color: $btn-color !important;
 }
 
-
-.HomePage {
-
+#delete{
+  position: relative;
 }
 
-// .mt {
-//   margin-top: 8vh !important;
-// }
+
+
 
 #form{
   position: relative !important;
@@ -75,16 +93,32 @@ h1.Display-4{
 
 
 #btn{
-  border-color: #FAAD80 !important;
-  background-color: #FAAD80 !important;
+  border-color: $btn-color !important;
+  background-color: $btn-color !important;
 }
 
-Link{
-  text-decoration: none !important;
-  color: rgb(255, 255, 255) !important;
 
+
+#btn2{
+  border-color: $btn-color2 !important;
+  background-color: $btn-color2 !important;
 }
 
-.AppPage {
 
+@keyframes wiggle {
+  10%, 90% {
+ transform: translate3d(-1px, 0, 0);
+}
+
+20%, 80% {
+ transform: translate3d(2px, 0, 0);
+}
+
+30%, 50%, 70% {
+ transform: translate3d(-4px, 0, 0);
+}
+
+40%, 60% {
+ transform: translate3d(4px, 0, 0);
+}
 }

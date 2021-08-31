@@ -28,10 +28,10 @@ const NavBar = props => {
 			</nav>
 			<div className="navbar-collapse">
 				{drop ? (
-					<ul>
+					<ul className="d-flex flex-column justify-content-end">
 						{props.routes.map(({ key, path }) => (
 							<li key={key} className="nav-item">
-								<Link className="nav-link" key={key} to={path}>
+								<Link className="nav-link" id="linky" key={key} to={path}>
 									{key}
 								</Link>
 							</li>

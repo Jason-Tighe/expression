@@ -57,7 +57,7 @@ export default function MoodBoost(props) {
 	}, []);
 
 	return (
-		<div className="jumbotron jumbotron-fluid">
+		<div id="mood" className="jumbotron jumbotron-fluid">
 			<div className="container">
 				<h1>
 					{Object.keys(west).length ? <WestQuote west={west} /> : 'No Yee'}

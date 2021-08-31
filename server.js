@@ -5,41 +5,105 @@ const PORT = process.env.PORT || 8000;
 const mongoose = require('mongoose');
 const path = require('path');
 
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI;
 const db = mongoose.connection;
-const ventController = require('./controllers/vents')
-
-
+const ventController = require('./controllers/vents');
+//have to bring in http becuase we need to interact with it directly
+const http = require('http');
+const server = http.createServer(app);
+//socket.io stuff
+const socketio = require('socket.io');
+const io = socketio(server);
+const {
+	addUser,
+	removeUser,
+	getUser,
+	getUserInRoom
+} = require('./controllers/users');
 
 mongoose.connect(MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true
 });
 db.on('open', () => {
-    console.log('Mongo is Connected');
+	console.log('Mongo is Connected');
 });
 /* Middleware */
 app.use(express.json());
-if (process.env.NODE_ENV !== 'development'){
-  app.use(express.static('public'))
+if (process.env.NODE_ENV !== 'development') {
+	app.use(express.static('public'));
 }
 
+//run when  user connects
+io.on('connection', socket => {
+	console.log('socks on!');
+	//io.emit is to everyone
+	//.emit will go to just the user
+	socket.emit('message', 'Welcome to FunkyChat!');
+
+	socket.on('join', ({ name, room }, callback) => {
+		const { error, user } = addUser({ id: socket.id, name, room });
+
+		if (error) return callback(error);
+
+		socket.emit('message', {
+			user: 'admin',
+			text: `${user.name}, welcome to the room ${user.room}`
+		});
+		socket.broadcast
+			.to(user.room)
+			.emit('message', { user: 'admin', text: `${user.name}, has joined!` });
+
+		socket.join(user.room);
+
+		io.to(user.room).emit('roomData', {
+			room: user.room,
+			users: getUsersInRoom(user.room)
+		});
+
+		callback();
+	});
+
+	socket.on('sendMessage', (message, callback) => {
+		const user = getUser(socket.id);
+
+		io.to(user.room).emit('message', { user: user.name, text: message });
+		io.to(user.room).emit('roomData', {
+			room: user.room,
+			users: getUsersInRoom(user.room)
+		});
+
+		callback();
+	});
+
+	//broadcast.emit = sends it to everyone but the user.
+	//when a user disconnects
+	socket.on('disconnect', () => {
+		const user = removeUser(sock.id);
+
+		if (user) {
+			io.to(user, room).emit('message', {
+				user: 'admin',
+				text: `${user.name} has left.`
+			});
+		}
+	});
+});
+
 /* Controller Goes Here Remove the tes*/
-app.use('/api/vents', ventController)
+app.use('/api/vents', ventController);
 /* Controller Ends here */
 //LISTENER
 
-
 // for react router
 app.get('*', (req, res) => {
-	res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')))
-})
-
-app.listen(PORT, () => {
-    console.log(`API Listening on port ${PORT}`);
+	res.sendFile(path.resolve(path.join(__dirname, 'public', 'index.html')));
 });
 
-
+//i'm going to change this to server, should still work.
+server.listen(PORT, () => {
+	console.log(`API Listening on port ${PORT}`);
+});
 
 /* Vanilla Node Server
 const http = require('http'); // The node http module allow you to create servers
