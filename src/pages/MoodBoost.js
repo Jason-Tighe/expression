@@ -11,7 +11,7 @@ export default function MoodBoost(props) {
 	const getDad = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8080/https://icanhazdadjoke.com/',
+				'http://icanhazdadjoke.com/',
 				{ headers: { Accept: 'application/json' } }
 			);
 			const data = await response.json();
@@ -24,7 +24,7 @@ export default function MoodBoost(props) {
 	const getAffirmation = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8080/https://www.affirmations.dev/',
+				'http://www.affirmations.dev/',
 				{
 					headers: {
 						Accept: 'application/json'
@@ -37,7 +37,7 @@ export default function MoodBoost(props) {
 		} catch (err) {
 			console.error(err);
 		}
-	};
+	}
 
 	const getWest = async () => {
 		try {

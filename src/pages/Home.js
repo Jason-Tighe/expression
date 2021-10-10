@@ -264,7 +264,7 @@ export default function Home(props) {
 										type="text"
 										id="title"
 										className="form-control"
-										placeholder="Create a Tittle"
+										placeholder="Create a Title"
 										onChange={handleChange}
 									/>
 								</div>
