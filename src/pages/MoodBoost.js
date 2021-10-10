@@ -25,11 +25,7 @@ export default function MoodBoost(props) {
 		try {
 			const response = await fetch(
 				'https://www.affirmations.dev/',
-				{
-					headers: {
-						Accept: 'application/json'
-					}
-				}
+				{ headers: { Accept: 'application/json' } }
 			);
 			const data = await response.json();
 			setAffirmation(data);
