@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import WestQuote from '../components/WestQuote.js';
 import Affirmation from '../components/Affirm';
 import DadJoke from '../components/DadJoke';
-import PORT from '../../server'
 
 export default function MoodBoost(props) {
 	const [affirmation, setAffirmation] = useState({});
@@ -25,7 +24,7 @@ export default function MoodBoost(props) {
 	const getAffirmation = async () => {
 		try {
 			const response = await fetch(
-				`${PORT}/https://www.affirmations.dev/`,
+				`http://www.affirmations.dev/`,
 				{ headers: { Accept: 'application/json' } }
 			);
 			const data = await response.json();
