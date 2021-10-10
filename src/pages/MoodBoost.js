@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import WestQuote from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/WestQuote.js';
-import Affirmation from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/Affirm.js';
-import DadJoke from '/Users/slowdolphin/Desktop/seir-flex-hypatia/labs/expression/src/components/DadJoke.js';
+import WestQuote from '../components/WestQuote.js';
+import Affirmation from '../components/Affirm';
+import DadJoke from '../components/DadJoke';
+import PORT from '../../server'
 
 export default function MoodBoost(props) {
 	const [affirmation, setAffirmation] = useState({});
@@ -11,7 +12,7 @@ export default function MoodBoost(props) {
 	const getDad = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8080/https://icanhazdadjoke.com/',
+				'https://icanhazdadjoke.com/',
 				{ headers: { Accept: 'application/json' } }
 			);
 			const data = await response.json();
@@ -24,12 +25,8 @@ export default function MoodBoost(props) {
 	const getAffirmation = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8080/https://www.affirmations.dev/',
-				{
-					headers: {
-						Accept: 'application/json'
-					}
-				}
+				`http://${PORT}/https://www.affirmations.dev/`,
+				{ headers: { Accept: 'application/json' } }
 			);
 			const data = await response.json();
 			setAffirmation(data);
@@ -37,7 +34,7 @@ export default function MoodBoost(props) {
 		} catch (err) {
 			console.error(err);
 		}
-	};
+	}
 
 	const getWest = async () => {
 		try {
